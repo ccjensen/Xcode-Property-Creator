@@ -147,8 +147,9 @@ foreach $selectedLine (split(/\n+/, $selectedText)) {
 		$storageName = $name;
 		$name = $1;		
 	}
-	
-	# Create and insert the property declaration
+
+
+	# Create and insert the propert declaration
 	my $propertyDeclaration = "\@property (nonatomic, $behavior) $type " . $asterisk . $name . ";\n";
 	
 	if ($currentScopeSetting eq 'private')
@@ -196,7 +197,7 @@ foreach $selectedLine (split(/\n+/, $selectedText)) {
 	}
 	else 
 	{
-		$releaseStatement = "\t[$releaseName release];\n"
+		$releaseStatement = "\tself.$name = nil;\n";  
 	}
 		
 	$releaseStatements = $releaseStatements . $releaseStatement;
@@ -238,7 +239,7 @@ on run argv
 	set newDocText to (item 2 of argv)
 	tell application "Xcode"
 		set doc to open fileAlias
-		set text of doc to (text 1 thru -2 of newDocText)
+		set text of doc to newDocText
 	end tell
 end run
 REPLACEFILESCRIPT
@@ -306,7 +307,7 @@ if (length($implementationFileContents) && ($implementationFileContents =~ /(\@i
 	}
 	elsif ($implementationFileContents =~ /(\@synthesize .*\n)*(\@synthesize [^\n]*\n)/s) {  
 		my $synthesizeMatch = $2;  
- 		my $indexAfterSynthesizeMatch = index($implementationFileContents, $synthesizeMatch) + length($synthesizeMatch);  
+ 		my $indexAfterSynthesizeMatch = index($implementationFileContents, $synthesizeMatch) + length($synthesizeMatch);
 		my $deallocMethod = "\n- (void)dealloc\n{\n$releaseStatements\n\t[super dealloc];\n}\n";  
 
 		substr($implementationFileContents, $indexAfterSynthesizeMatch, 0) = $deallocMethod;  
