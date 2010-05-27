@@ -1,0 +1,42 @@
+++++++++++  Xcode Property Creator ++++++++++
+tested with Xcode 3.2.2
+
+To use:
+Xcode > Scripts Menu > Edit User Scripts...
+Add new User Script > Add Script File...
+Select the PropertyCreator.pl
+Assign a shortcut (Optional)
+
+Select some instance variable declarations and execute script. Example input:
+@interface Temp : NSObject {
+	NSString *temp;
+	NSArray *array_;
+@private
+	NSMutableSet *privateSet_;
+}
+
+Script will generate both public and private property declarations as well as add synthesize and release statements.
+
+Inspired by: 
+http://cocoawithlove.com/2008/12/instance-variable-to-synthesized.html
+
+Created by Matt Gallagher on 20/10/08.
+Copyright 2008 Matt Gallagher. All rights reserved.
+
+Enhancements by Yung-Luen Lan and Mike Schrag on 12/08/09.
+(mainly: multiple lines)
+Copyright 2009 Yung-Luen Lan and Mike Schrag. All rights reserved.
+
+Enhancements by Pierre Bernard on 20/09/09.
+(mainly: underbar storage name, behavior, dealloc,…)
+Copyright 2009 Pierre Bernard. All rights reserved.
+
+Enhancements by Chris Jensen on 27/05/10.
+(mainly: underbar after storage name and moves declaration of private variables to implementation)
+Copyright 2010 Chris Jensen. All rights reserved.
+
+Permission is given to use this source code file without charge in any
+project, commercial or otherwise, entirely at your risk, with the condition
+that any redistribution (in part or whole) of source code must retain
+this copyright and permission notice. Attribution in compiled projects is
+appreciated but not required.
