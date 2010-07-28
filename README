@@ -17,6 +17,9 @@ Select some instance variable declarations and execute script. Example input:
 
 Script will generate both public and private property declarations as well as add synthesize and release statements.
 
+Screencast showing it's usage can be downloaded here:
+http://cl.ly/1nVI
+
 Inspired by: 
 http://cocoawithlove.com/2008/12/instance-variable-to-synthesized.html
 
